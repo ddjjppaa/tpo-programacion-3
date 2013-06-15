@@ -29,7 +29,7 @@ public class Principal {
 //		}
 		
 	
-		Ejercicios.Ejercicio4(miEjercicio, "a", 7);
+		Ejercicios.Ejercicio4(miEjercicio, "a", 9);
 	
 	}
 
