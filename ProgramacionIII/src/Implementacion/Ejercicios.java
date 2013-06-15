@@ -115,8 +115,36 @@ public class Ejercicios {
 		return 0;
 	}
 
-	static void Ejercicio3D(GrafoDirTDA<String> g) {
+	public static void Ejercicio3D(GrafoDirTDA<String> g) {
+		GrafoDirTDA<String> lcm = Algoritmos.FloydPD(g);
 
+		int distanciaMin = 99999999;
+		String vertDesde = null;
+		String vertHasta = null;
+
+		ConjuntoTDA<String> conj1 = lcm.Vertices();
+		while (!conj1.conjuntoVacio()) {
+			String elemento = conj1.elegir();
+			conj1.sacar(elemento);
+			ConjuntoTDA<String> conj2 = lcm.Adyacentes(elemento);
+			while (!conj2.conjuntoVacio()) {
+				String elemento2 = conj2.elegir();
+				conj2.sacar(elemento2);
+				if (!g.ExisteArista(elemento, elemento2)) {
+					if (lcm.ExisteArista(elemento, elemento2)) {
+						if (lcm.PesoArista(elemento, elemento2) < distanciaMin) {
+							distanciaMin = lcm.PesoArista(elemento, elemento2);
+							vertDesde = elemento;
+							vertHasta = elemento2;
+
+						}
+					}
+				}
+			}
+
+		}
+		System.out.println("Desde: " + vertDesde + " Hasta: " + vertHasta
+				+ " Distancia: " + distanciaMin);
 	}
 
 	public static void Ejercicio4(GrafoDirTDA<String> g, String origen, int valor) {
