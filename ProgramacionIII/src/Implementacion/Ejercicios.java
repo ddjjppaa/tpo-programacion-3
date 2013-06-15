@@ -27,6 +27,7 @@ public class Ejercicios {
 		miGrafo.AgregarArista("b", "c", 2);
 		miGrafo.AgregarArista("a", "c", 5);		
 		miGrafo.AgregarArista("b", "d", 5);
+		miGrafo.AgregarArista("d", "b", 1);
 		miGrafo.AgregarArista("d", "c", 1);
 		
 //		miGrafo.AgregarVertice("a");
@@ -124,14 +125,17 @@ public class Ejercicios {
 		
 		ConjuntoTDA<String> conjuntoVerticesPendientes = new Conjunto<String>();
 		conjuntoVerticesPendientes = g.Vertices();
-		Ejercicio4Bis(g, origen, valor, conjuntoVerticesPendientes, solucion);
+		int etapa = 1;
+		Ejercicio4Bis(g, origen, valor, conjuntoVerticesPendientes, solucion, etapa);
 	}
 
 	static void Ejercicio4Bis(GrafoDirTDA<String> g, String origen, int valor,
 			ConjuntoTDA<String> conjuntoVerticesPendientes,
-			ColaTDA<String> solucion) {
+			ColaTDA<String> solucion, int etapa) {
 		// Creo que faltar’a pasar como par‡metro un booleano que diga que
 		// encontro la soluci—n para que se detenga todo.
+		ColaTDA<String> miSolucionEtapa = new Cola<String>();		
+		miSolucionEtapa = solucion;
 		conjuntoVerticesPendientes.sacar(origen);
 		solucion.acolar(origen);
 		ConjuntoTDA<String> conjuntoVerticesAdyacentes = new Conjunto<String>();
@@ -142,11 +146,10 @@ public class Ejercicios {
 			// Si es factible:
 			// * El vŽrtice aœn no ha sido visitado.
 			// * Al visitarlo no excedo el valor de costo m‡ximo.
-			if (conjuntoVerticesPendientes.pertenece(unVerticeAdyacente)
-					& valor - g.PesoArista(origen, unVerticeAdyacente) >= 0) {
+			if (valor - g.PesoArista(origen, unVerticeAdyacente) >= 0) {
 				valor = valor - g.PesoArista(origen, unVerticeAdyacente);
 				Ejercicio4Bis(g, unVerticeAdyacente, valor,
-						conjuntoVerticesPendientes, solucion);
+						conjuntoVerticesPendientes, miSolucionEtapa, etapa+1);
 			}
 			;
 		}
@@ -158,9 +161,9 @@ public class Ejercicios {
 			if (valor == 0) {
 				System.out.println("Se pudo encontrar una soluci—n");
 				// Hacer impresion de elementos de cola.
-				while (!solucion.colaVacia()) {
-					System.out.println(solucion.primero());
-					solucion.desacolar();
+				while (!miSolucionEtapa.colaVacia()) {
+					System.out.println(miSolucionEtapa.primero());
+					miSolucionEtapa.desacolar();
 				}
 			}
 			;
