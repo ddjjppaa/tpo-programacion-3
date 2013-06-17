@@ -1,8 +1,6 @@
 package Principal;
 import Implementacion.*;
-import Implementaciones.Cola;
-import TDA.ColaTDA;
-import TDA.ConjuntoTDA;
+import Implementaciones.GrafoDir;
 import TDA.GrafoDirTDA;
 
 public class Principal {
@@ -11,9 +9,12 @@ public class Principal {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		//GrafoDirTDA<String> miEjercicio = Ejercicios.cargarGrafo();
+		
 		GrafoDirTDA<String> miEjercicio = Ejercicios.cargarGrafo();
 		
-		ConjuntoTDA<String> vertices = miEjercicio.Vertices();
+		//ConjuntoTDA<String> vertices = miEjercicio.Vertices();
 
 //		while (!vertices.conjuntoVacio()) {
 //			String k = vertices.elegir();

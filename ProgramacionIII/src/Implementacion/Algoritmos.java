@@ -1,5 +1,7 @@
 package Implementacion;
 
+import Implementaciones.GrafoDir;
+import TDA.ConjuntoTDA;
 import TDA.GrafoDirTDA;
 
 public class Algoritmos {
@@ -12,9 +14,54 @@ public class Algoritmos {
 	}
 	
 	// Ejercicio 3B
-	static GrafoDirTDA<String> FloydRecursivo(GrafoDirTDA<String> g){
-		
-		return null;
+	public static GrafoDirTDA<String> FloydRecursivo(GrafoDirTDA<String> g) {
+		GrafoDirTDA<String> resultadoParcial = new GrafoDir<String>();
+		resultadoParcial.InicializarGrafo();
+		resultadoParcial.Vertices();//para que es este metodo?
+		ConjuntoTDA<String> conj = g.Vertices();
+
+		while (!conj.conjuntoVacio()) {
+			String elemento = conj.elegir();
+			conj.sacar(elemento);
+			resultadoParcial.AgregarVertice(elemento);//hay que validar que no exista ya en solucion parcial
+		}
+
+		ConjuntoTDA<String> vertices = g.Vertices();
+		while (!vertices.conjuntoVacio()) {
+			int pesoAcum = 0;
+			String origen = vertices.elegir();
+			vertices.sacar(origen);
+			FloydRec(g, origen, origen, g.Adyacentes(origen), pesoAcum,
+					resultadoParcial);
+		}
+		return resultadoParcial;
+	}
+
+	static void FloydRec(GrafoDirTDA<String> g, String origen,
+			String adyacente, ConjuntoTDA<String> adyacentes, int pesoAcum,
+			GrafoDirTDA<String> resultadoParcial) {
+
+		while (!adyacentes.conjuntoVacio()) {
+			String vertAdy = adyacentes.elegir();
+			adyacentes.sacar(vertAdy);
+			int pesoActual = g.PesoArista(adyacente, vertAdy);
+			pesoAcum = pesoActual + pesoAcum;
+			System.out.println("Origen: " + origen + " Destino: " + vertAdy
+					+ " PesoAcum: " + pesoAcum + " PesoActual: " + pesoActual
+					+ " Acumulado hasta: " + adyacente + " --> " + vertAdy);
+			if (!resultadoParcial.ExisteArista(origen, vertAdy)) {
+				resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum);
+			} else {
+				if (pesoAcum < resultadoParcial.PesoArista(origen, vertAdy)) {
+					resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum);//
+				}
+			}
+
+			FloydRec(g, origen, vertAdy, g.Adyacentes(vertAdy), pesoAcum,
+					resultadoParcial);
+			pesoAcum = 0;
+		}
+
 	}
 	
 	// Ejercicio 3C

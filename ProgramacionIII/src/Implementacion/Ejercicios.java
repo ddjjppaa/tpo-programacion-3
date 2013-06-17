@@ -150,52 +150,47 @@ public class Ejercicios {
 	public static void Ejercicio4(GrafoDirTDA<String> g, String origen, int valor) {
 		ColaTDA<String> solucion = new Cola<String>();
 		solucion.inicializarCola();
-		
 		ConjuntoTDA<String> conjuntoVerticesPendientes = new Conjunto<String>();
 		conjuntoVerticesPendientes = g.Vertices();
 		int etapa = 1;
 		Ejercicio4Bis(g, origen, valor, conjuntoVerticesPendientes, solucion, etapa);
 	}
 
-	static void Ejercicio4Bis(GrafoDirTDA<String> g, String origen, int valor,
-			ConjuntoTDA<String> conjuntoVerticesPendientes,
-			ColaTDA<String> solucion, int etapa) {
+	static void Ejercicio4Bis (GrafoDirTDA<String> g, String origen, int valor,
+		ConjuntoTDA<String> verticesPendientes, ColaTDA<String> solucion, int etapa) {
+		
 		// Creo que faltaría pasar como parámetro un booleano que diga que
 		// encontro la solución para que se detenga todo.
-		ColaTDA<String> miSolucionEtapa = new Cola<String>();		
-		miSolucionEtapa = solucion;
-		conjuntoVerticesPendientes.sacar(origen);
+				
 		solucion.acolar(origen);
-		ConjuntoTDA<String> conjuntoVerticesAdyacentes = new Conjunto<String>();
-		conjuntoVerticesAdyacentes = g.Adyacentes(origen);
-		while (!conjuntoVerticesAdyacentes.conjuntoVacio()) {
-			String unVerticeAdyacente = conjuntoVerticesAdyacentes.elegir();
-			conjuntoVerticesAdyacentes.sacar(unVerticeAdyacente);
+		verticesPendientes.sacar(origen);
+		System.out.println("Etapa: "+etapa+" => " +solucion.toString());
+		System.out.println();
+		ConjuntoTDA<String> verticesAdyacentes = new Conjunto<String>();
+		verticesAdyacentes = g.Adyacentes(origen);
+		while (!verticesAdyacentes.conjuntoVacio()) {
+			ColaTDA<String> miSolucionParcial = new Cola<String>();
+			miSolucionParcial = solucion;
+			
+			String unVerticeAdyacente = verticesAdyacentes.elegir();
+			verticesAdyacentes.sacar(unVerticeAdyacente);
 			// Si es factible:
 			// * El vértice aún no ha sido visitado.
 			// * Al visitarlo no excedo el valor de costo máximo.
 			if (valor - g.PesoArista(origen, unVerticeAdyacente) >= 0) {
-				valor = valor - g.PesoArista(origen, unVerticeAdyacente);
-				Ejercicio4Bis(g, unVerticeAdyacente, valor,
-						conjuntoVerticesPendientes, miSolucionEtapa, etapa+1);
-			}
-			;
-		}
-		;
+				Ejercicio4Bis(g, unVerticeAdyacente, valor- g.PesoArista(origen, unVerticeAdyacente),
+						verticesPendientes, miSolucionParcial, etapa+1);
+			};
+		};
 		// Si es final:
 		// * Verifica si quedan vértices pendientes de visitar.
 		// * Verifica que el recorrido haya costado lo mismo que valor.
-		if (conjuntoVerticesPendientes.conjuntoVacio()) {
+		if (verticesPendientes.conjuntoVacio()) {
 			if (valor == 0) {
 				System.out.println("Se pudo encontrar una solución");
 				// Hacer impresion de elementos de cola.
-				while (!miSolucionEtapa.colaVacia()) {
-					System.out.println(miSolucionEtapa.primero());
-					miSolucionEtapa.desacolar();
-				}
-			}
-			;
-		}
-		;
-	}
+				System.out.println(solucion.toString());
+			};
+		};
+	};
 }
