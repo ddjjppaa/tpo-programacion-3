@@ -161,17 +161,16 @@ public class Ejercicios {
 		
 		// Creo que faltaría pasar como parámetro un booleano que diga que
 		// encontro la solución para que se detenga todo.
-				
-		solucion.acolar(origen);
-		verticesPendientes.sacar(origen);
-		System.out.println("Etapa: "+etapa+" => " +solucion.toString());
+		ColaTDA<String> miSolucionParcial = new Cola<String>();
+		miSolucionParcial = solucion;				
+		miSolucionParcial.acolar(origen);
+		System.out.println("Etapa: "+etapa+" => " +miSolucionParcial.toString()+" Solución etapa: "+solucion);
 		System.out.println();
+		verticesPendientes.sacar(origen);
 		ConjuntoTDA<String> verticesAdyacentes = new Conjunto<String>();
 		verticesAdyacentes = g.Adyacentes(origen);
 		while (!verticesAdyacentes.conjuntoVacio()) {
-			ColaTDA<String> miSolucionParcial = new Cola<String>();
-			miSolucionParcial = solucion;
-			
+			miSolucionParcial = solucion;			
 			String unVerticeAdyacente = verticesAdyacentes.elegir();
 			verticesAdyacentes.sacar(unVerticeAdyacente);
 			// Si es factible:
@@ -182,6 +181,7 @@ public class Ejercicios {
 						verticesPendientes, miSolucionParcial, etapa+1);
 			};
 		};
+
 		// Si es final:
 		// * Verifica si quedan vértices pendientes de visitar.
 		// * Verifica que el recorrido haya costado lo mismo que valor.

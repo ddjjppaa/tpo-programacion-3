@@ -23,7 +23,7 @@ public class Algoritmos {
 		while (!conj.conjuntoVacio()) {
 			String elemento = conj.elegir();
 			conj.sacar(elemento);
-			resultadoParcial.AgregarVertice(elemento);//hay que validar que no exista ya en solucion parcial
+			resultadoParcial.AgregarVertice(elemento);
 		}
 
 		ConjuntoTDA<String> vertices = g.Vertices();
@@ -53,13 +53,13 @@ public class Algoritmos {
 				resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum);
 			} else {
 				if (pesoAcum < resultadoParcial.PesoArista(origen, vertAdy)) {
-					resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum);//
+					resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum);
 				}
 			}
 
 			FloydRec(g, origen, vertAdy, g.Adyacentes(vertAdy), pesoAcum,
 					resultadoParcial);
-			pesoAcum = 0;
+			pesoAcum = pesoAcum-g.PesoArista(adyacente, vertAdy);
 		}
 
 	}
