@@ -14,111 +14,111 @@ public class Algoritmos {
 	}
 	
 	// Ejercicio 3B
-	public static GrafoDirTDA<String> FloydRecursivo(GrafoDirTDA<String> g) {
+	public static GrafoDirTDA<String> FloydRecursivo(GrafoDirTDA<String> g) {//O(nö3)
 		GrafoDirTDA<String> resultadoParcial = new GrafoDir<String>();
 		resultadoParcial.InicializarGrafo();
-		resultadoParcial.Vertices();//para que es este metodo?
-		ConjuntoTDA<String> conj = g.Vertices();
+		resultadoParcial.Vertices();//O(n)
+		ConjuntoTDA<String> conj = g.Vertices(); // O(n)
 
-		while (!conj.conjuntoVacio()) {
-			String elemento = conj.elegir();
-			conj.sacar(elemento);
-			resultadoParcial.AgregarVertice(elemento);
-		}
+		while (!conj.conjuntoVacio()) {//C
+			String elemento = conj.elegir();//C
+			conj.sacar(elemento);//C
+			resultadoParcial.AgregarVertice(elemento);//C
+		}//O(n) sigo sin terminar de entender que hace este metodo, es porque no se puede hacer una copia directa como en 4bis?
 
-		ConjuntoTDA<String> vertices = g.Vertices();
-		while (!vertices.conjuntoVacio()) {
-			int pesoAcum = 0;
-			String origen = vertices.elegir();
-			vertices.sacar(origen);
+		ConjuntoTDA<String> vertices = g.Vertices();//O(n)
+		while (!vertices.conjuntoVacio()) {//C * O(n-1)
+			int pesoAcum = 0; //C
+			String origen = vertices.elegir();//C
+			vertices.sacar(origen);//C
 			FloydRec(g, origen, origen, g.Adyacentes(origen), pesoAcum,
-					resultadoParcial);
-		}
+					resultadoParcial);// O(nö2) + O(n-1) = O(n^2)
+		}//n* lo que me de floyd recursivo
 		return resultadoParcial;
-	}
+	}// O(n-1) * O(nö2) = O(nö3)
 
 	static void FloydRec(GrafoDirTDA<String> g, String origen,
 			String adyacente, ConjuntoTDA<String> adyacentes, int pesoAcum,
 			GrafoDirTDA<String> resultadoParcial) {
 
-		while (!adyacentes.conjuntoVacio()) {
-			String vertAdy = adyacentes.elegir();
-			adyacentes.sacar(vertAdy);
-			int pesoActual = g.PesoArista(adyacente, vertAdy);
-			pesoAcum = pesoActual + pesoAcum;
+		while (!adyacentes.conjuntoVacio()) {//C * O(n-1)
+			String vertAdy = adyacentes.elegir();//C
+			adyacentes.sacar(vertAdy);//O(n-1)
+			int pesoActual = g.PesoArista(adyacente, vertAdy);// O(n)
+			pesoAcum = pesoActual + pesoAcum;//C
 			System.out.println("Origen: " + origen + " Destino: " + vertAdy
 					+ " PesoAcum: " + pesoAcum + " PesoActual: " + pesoActual
 					+ " Acumulado hasta: " + adyacente + " --> " + vertAdy);
-			if (!resultadoParcial.ExisteArista(origen, vertAdy)) {
-				resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum);
+			if (!resultadoParcial.ExisteArista(origen, vertAdy)) {// O(n)
+				resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum);// O(n)
 			} else {
-				if (pesoAcum < resultadoParcial.PesoArista(origen, vertAdy)) {
-					resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum);
+				if (pesoAcum < resultadoParcial.PesoArista(origen, vertAdy)) {// O(n)
+					resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum);// O(n)
 				}
 			}
 
 			FloydRec(g, origen, vertAdy, g.Adyacentes(vertAdy), pesoAcum,
-					resultadoParcial);
-			pesoAcum = pesoAcum-g.PesoArista(adyacente, vertAdy);
-		}
+					resultadoParcial);// O(n-1) + O(n-1) + O(n)
+			pesoAcum = pesoAcum-g.PesoArista(adyacente, vertAdy);//O(n)
+		}// O(n-1) * O(n) = O(nö2)
 
 	}
 	
 	// Ejercicio 3C
-	public static GrafoDirTDA<String> FloydPD(GrafoDirTDA<String> g) {
+	public static GrafoDirTDA<String> FloydPD(GrafoDirTDA<String> g) { // O(n^4)
 		ConjuntoTDA<String> conjuntoI, conjuntoJ, conjuntoK;
 		String i, j, k;
 		GrafoDirTDA<String> r = new GrafoDir<String>();
 		r.InicializarGrafo();
 
-		conjuntoK = g.Vertices();
-		while (!conjuntoK.conjuntoVacio()) {
-			k = conjuntoK.elegir();
-			conjuntoK.sacar(k);
-			r.AgregarVertice(k);
-		}
+		conjuntoK = g.Vertices();// O(n)
+		while (!conjuntoK.conjuntoVacio()) { //C * O(n)
+			k = conjuntoK.elegir(); // C
+			conjuntoK.sacar(k); // O(n)
+			r.AgregarVertice(k); // O(n)
+		} // O(nö2)
 
-		conjuntoK = g.Vertices();
-		while (!conjuntoK.conjuntoVacio()) {
-			k = conjuntoK.elegir();
-			conjuntoK.sacar(k);
-			conjuntoI = g.Adyacentes(k);
-			while (!conjuntoI.conjuntoVacio()) {
-				i = conjuntoI.elegir();
-				conjuntoI.sacar(i);
-				r.AgregarArista(k, i, g.PesoArista(k, i));
-			}
-		}
+		conjuntoK = g.Vertices(); // O(n)
+		while (!conjuntoK.conjuntoVacio()) { //C * O(n)
+			k = conjuntoK.elegir(); //C
+			conjuntoK.sacar(k); // O(n)
+			conjuntoI = g.Adyacentes(k); // O(n)
+			while (!conjuntoI.conjuntoVacio()) {// O(n)
+				i = conjuntoI.elegir();// O(c)
+				conjuntoI.sacar(i); // O(n)
+				r.AgregarArista(k, i, g.PesoArista(k, i)); // C
+			} //O(nö2)
+		} // O(nö3)
 
-		conjuntoK = g.Vertices();
-		while (!conjuntoK.conjuntoVacio()) {
-			k = conjuntoK.elegir();
-			conjuntoK.sacar(k);
-			conjuntoI = g.Vertices();
-			conjuntoI.sacar(k);
-			while (!conjuntoI.conjuntoVacio()) {
-				i = conjuntoI.elegir();
-				conjuntoI.sacar(i);
-				if (r.ExisteArista(i, k)) {
-					conjuntoJ = r.Adyacentes(k);
-					conjuntoJ.sacar(i);
-					while (!conjuntoJ.conjuntoVacio()) {
-						j = conjuntoJ.elegir();
-						conjuntoJ.sacar(j);
-						if (r.ExisteArista(i, j)) {
-							if (r.PesoArista(i, k) + r.PesoArista(k, j) < r
+		conjuntoK = g.Vertices(); // O(n)
+		while (!conjuntoK.conjuntoVacio()) { // C * O(n-1)
+			k = conjuntoK.elegir(); //C
+			conjuntoK.sacar(k); // O(n)
+			conjuntoI = g.Vertices(); // O(n)
+			conjuntoI.sacar(k); // O(n)
+			while (!conjuntoI.conjuntoVacio()) { // C * O(n)
+				i = conjuntoI.elegir(); // C
+				conjuntoI.sacar(i); // O(n)
+				if (r.ExisteArista(i, k)) { // O(n)
+					conjuntoJ = r.Adyacentes(k); // O(n-1)
+					conjuntoJ.sacar(i); // O(n)
+					while (!conjuntoJ.conjuntoVacio()) { // C * O(n)
+						j = conjuntoJ.elegir(); // C
+						conjuntoJ.sacar(j); // O(n)
+						if (r.ExisteArista(i, j)) { // O(n)
+							if (r.PesoArista(i, k) + r.PesoArista(k, j) < r // 3 * O(n)
 									.PesoArista(i, j)) {
 								r.AgregarArista(i, j,
-										r.PesoArista(i, k) + r.PesoArista(k, j));
+										r.PesoArista(i, k) + r.PesoArista(k, j));//O(n) + O(n)
 							}
 						} else {
 							r.AgregarArista(i, j,
-									r.PesoArista(i, k) + r.PesoArista(k, j));
+									r.PesoArista(i, k) + r.PesoArista(k, j));//O(n) + O(n)
 						}
-					}
+					} // O(nö2)
 				}
-			}
-		}
+			}// O(nö3)
+		} //O(n^4)
 
 		return r;
 
