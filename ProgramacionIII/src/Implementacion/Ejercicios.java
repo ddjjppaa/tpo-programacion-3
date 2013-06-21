@@ -52,11 +52,6 @@ public class Ejercicios {
 		miGrafo.AgregarVertice("r");
 		miGrafo.AgregarVertice("s");
 		miGrafo.AgregarVertice("t");
-		miGrafo.AgregarVertice("u");
-		miGrafo.AgregarVertice("v");
-		miGrafo.AgregarVertice("w");
-		miGrafo.AgregarVertice("x");
-		miGrafo.AgregarVertice("y");
 		miGrafo.AgregarVertice("z");
 
 		miGrafo.AgregarArista("a", "b", 2);
@@ -100,6 +95,50 @@ public class Ejercicios {
 		miGrafo.AgregarArista("q","r",8);
 		miGrafo.AgregarArista("s","z",2);
 		miGrafo.AgregarArista("t","z",8);
+		
+		// Agrego caminos en sentido opuesto
+		
+		miGrafo.AgregarArista("b", "a", 2);
+		miGrafo.AgregarArista("c", "a", 4);
+		miGrafo.AgregarArista("d", "a", 1);
+		miGrafo.AgregarArista("c", "b", 3);
+		miGrafo.AgregarArista("e", "b", 1);
+		miGrafo.AgregarArista("e", "c", 2);
+		miGrafo.AgregarArista("f", "c", 2);
+		miGrafo.AgregarArista("f", "d", 5);
+		miGrafo.AgregarArista("g", "d", 4);
+		miGrafo.AgregarArista("h", "e", 3);
+		miGrafo.AgregarArista("g", "f", 3);
+		miGrafo.AgregarArista("h", "f",3);
+		miGrafo.AgregarArista("i", "f",2);
+		miGrafo.AgregarArista("j", "f",4);
+		miGrafo.AgregarArista("k", "g",2);
+		miGrafo.AgregarArista("l", "h",1);
+		miGrafo.AgregarArista("o", "h",8);
+		miGrafo.AgregarArista("j", "i",3);
+		miGrafo.AgregarArista("l", "i",3);
+		miGrafo.AgregarArista("m", "i",2);
+		miGrafo.AgregarArista("k", "j",6);
+		miGrafo.AgregarArista("m", "j",6);
+		miGrafo.AgregarArista("n", "j",3);
+		miGrafo.AgregarArista("n", "k",4);
+		miGrafo.AgregarArista("r", "k",2);
+		miGrafo.AgregarArista("m", "l",3);
+		miGrafo.AgregarArista("o", "l",6);
+		miGrafo.AgregarArista("o", "m",4);
+		miGrafo.AgregarArista("p", "m",2);
+		miGrafo.AgregarArista("n", "m",5);
+		miGrafo.AgregarArista("q", "n",2);
+		miGrafo.AgregarArista("r", "n",1);
+		miGrafo.AgregarArista("p", "o",2);
+		miGrafo.AgregarArista("s", "o",6);
+		miGrafo.AgregarArista("s", "p",2);
+		miGrafo.AgregarArista("t", "p",1);
+		miGrafo.AgregarArista("q", "p",1);
+		miGrafo.AgregarArista("t", "q",3);
+		miGrafo.AgregarArista("r", "q",8);
+		miGrafo.AgregarArista("z", "s",2);
+		miGrafo.AgregarArista("z", "t",8);
 
 		
 		return miGrafo;
@@ -149,6 +188,8 @@ public class Ejercicios {
 				+ " Distancia: " + distanciaMin);
 	}
 
+	// Ejercicio 4
+	
 	public static void Ejercicio4(GrafoDirTDA<String> g, String origen, int valor) {
 		VectorTDA<String> solucion = new Vector<String>();
 		solucion.inicializarVector(1000);
@@ -169,14 +210,16 @@ public class Ejercicios {
 		}	
 		
 //		try {
+//			System.out.println();
 //			System.out.println("Etapa: "+etapa+" => " +solucion.recuperarElemento(etapa) + " Costo Restante: "+valor);
 //		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		System.out.println();
+//			System.out.println();
 		
 		verticesPendientes.sacar(origen);
+		
 		ConjuntoTDA<String> verticesAdyacentes = new Conjunto<String>();
 		verticesAdyacentes = g.Adyacentes(origen);
 		while (!verticesAdyacentes.conjuntoVacio()) {
@@ -189,34 +232,30 @@ public class Ejercicios {
 				if (valor - g.PesoArista(origen, unVerticeAdyacente) >= 0) {
 					Ejercicio4Bis(g, unVerticeAdyacente, valor- g.PesoArista(origen, unVerticeAdyacente),
 							verticesPendientes, solucion, etapa+1);
-					if (valor- g.PesoArista(origen, unVerticeAdyacente)!=0){
-						verticesPendientes.agregar(unVerticeAdyacente);
-					};
-				};
-			};
-		};
+					// Si es final:
+					// * Verifica si quedan vértices pendientes de visitar.
+					// * Verifica que el recorrido haya costado lo mismo que valor.
 
-		// Si es final:
-		// * Verifica si quedan vértices pendientes de visitar.
-		// * Verifica que el recorrido haya costado lo mismo que valor.
-		if (verticesPendientes.conjuntoVacio()) {
-			if (valor == 0) {
-				verticesPendientes.agregar(origen);
-				// Vacío el conjunto de pendientes ya que sólo me interesa hallar una solución.
-				// En el caso de backtracking puro debería comentar la siguiente línea.
-				verticesPendientes.inicializarConjunto();
-				System.out.println();
-				System.out.println("Ejercicio 4bis:");
-				System.out.print("Se pudo encontrar una solución: ");
-				for (int i=1; i<=etapa;i++){
-					try {
-						System.out.print(solucion.recuperarElemento(i) + " ");
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					if (verticesPendientes.conjuntoVacio() && (valor - g.PesoArista(origen, unVerticeAdyacente)==0)){
+						verticesPendientes.agregar(unVerticeAdyacente);
+						System.out.println();
+						System.out.println("Ejercicio 4:");
+						System.out.print("Se pudo encontrar una solución: ");
+						for (int i=1; i<=etapa+1;i++){
+							try {
+								System.out.print(solucion.recuperarElemento(i) + " ");
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						};
+						//Termina el backtracking.
+						System.out.println("Terminar Backtracking");
+					}else{
+						verticesPendientes.agregar(unVerticeAdyacente);
 					}
 				};
 			};
 		};
-	};
+	}
 }
