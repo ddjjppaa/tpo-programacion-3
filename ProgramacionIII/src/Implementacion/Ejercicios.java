@@ -14,24 +14,6 @@ public class Ejercicios {
 		GrafoDirTDA<String> miGrafo = new GrafoDir<String>();
 		miGrafo.InicializarGrafo();
 		
-		// for (int i = 1; i<=26;i++){
-		// String caracter = String.valueOf(i+96);
-		// miGrafo.AgregarVertice(String.valueOf(i + 96));
-		// };
-
-//		miGrafo.AgregarVertice("a");
-//		miGrafo.AgregarVertice("b");
-//		miGrafo.AgregarVertice("c");
-//		miGrafo.AgregarVertice("d");
-//		
-//		miGrafo.AgregarArista("a", "b", 1);
-//		miGrafo.AgregarArista("b", "c", 2);
-//		miGrafo.AgregarArista("a", "c", 5);		
-//		miGrafo.AgregarArista("b", "d", 5);
-//		miGrafo.AgregarArista("d", "b", 1);
-//		miGrafo.AgregarArista("d", "c", 1);
-//		miGrafo.AgregarArista("c", "d", 1);
-		
 		miGrafo.AgregarVertice("a");
 		miGrafo.AgregarVertice("b");
 		miGrafo.AgregarVertice("c");
@@ -140,62 +122,64 @@ public class Ejercicios {
 		miGrafo.AgregarArista("z", "s",2);
 		miGrafo.AgregarArista("z", "t",8);
 
-		
 		return miGrafo;
 	}
 
 	// Ejercicio 2A
+	
 	static int Ejercicio2A(GrafoDirTDA<String> g) {
 
 		return 0;
 	}
 
 	// Ejercicio 2B
+	
 	static int Ejercicio2B(GrafoDirTDA<String> g) {
 
 		return 0;
 	}
 
+	// Ejercicio 3D
+	
 	public static void Ejercicio3D(GrafoDirTDA<String> g) {
 		GrafoDirTDA<String> lcm = Algoritmos.FloydPD(g);
 
-		int distanciaMin = 99999999;
-		String vertDesde = null;
-		String vertHasta = null;
+		int distanciaMin = 99999999; // C
+		String vertDesde = null; // C
+		String vertHasta = null; // C
 
-		ConjuntoTDA<String> conj1 = lcm.Vertices();
-		while (!conj1.conjuntoVacio()) {
-			String elemento = conj1.elegir();
-			conj1.sacar(elemento);
-			ConjuntoTDA<String> conj2 = lcm.Adyacentes(elemento);
-			while (!conj2.conjuntoVacio()) {
-				String elemento2 = conj2.elegir();
-				conj2.sacar(elemento2);
-				if (!g.ExisteArista(elemento, elemento2)) {
-					if (lcm.ExisteArista(elemento, elemento2)) {
-						if (lcm.PesoArista(elemento, elemento2) < distanciaMin) {
-							distanciaMin = lcm.PesoArista(elemento, elemento2);
-							vertDesde = elemento;
-							vertHasta = elemento2;
+		ConjuntoTDA<String> conj1 = lcm.Vertices(); // O(n)
+		while (!conj1.conjuntoVacio()) { // O(n)
+			String elemento = conj1.elegir(); // C
+			conj1.sacar(elemento); // O(n)
+			ConjuntoTDA<String> conj2 = lcm.Adyacentes(elemento); // O(n)
+			while (!conj2.conjuntoVacio()) { // O(n)
+				String elemento2 = conj2.elegir(); // C
+				conj2.sacar(elemento2); // O(n)
+				if (!g.ExisteArista(elemento, elemento2)) { // O(n)
+					if (lcm.ExisteArista(elemento, elemento2)) { // O(n)
+						if (lcm.PesoArista(elemento, elemento2) < distanciaMin) { // O(n)
+							distanciaMin = lcm.PesoArista(elemento, elemento2); // O(n)
+							vertDesde = elemento; // C
+							vertHasta = elemento2; // C
 
 						}
 					}
 				}
-			}
-
-		}
+			} // O(n^2)
+		} // O(n^3)
 		System.out.println("Desde: " + vertDesde + " Hasta: " + vertHasta
 				+ " Distancia: " + distanciaMin);
-	}
+	} // O(n^3)
 
 	// Ejercicio 4
 	
 	public static void Ejercicio4(GrafoDirTDA<String> g, String origen, int valor) {
 		VectorTDA<String> solucion = new Vector<String>();
-		solucion.inicializarVector(1000);
-		ConjuntoTDA<String> conjuntoVerticesPendientes = new Conjunto<String>();
-		conjuntoVerticesPendientes = g.Vertices();
-		int etapa = 1;
+		solucion.inicializarVector(1000); // O(n)
+		ConjuntoTDA<String> conjuntoVerticesPendientes = new Conjunto<String>(); // C
+		conjuntoVerticesPendientes = g.Vertices();  // O(n)
+		int etapa = 1; // C
 		Ejercicio4Bis(g, origen, valor, conjuntoVerticesPendientes, solucion, etapa);
 	}
 
@@ -203,59 +187,46 @@ public class Ejercicios {
 		ConjuntoTDA<String> verticesPendientes, VectorTDA<String> solucion, int etapa) {
 		
 		try {
-			solucion.agregarElemento(etapa, origen);
+			solucion.agregarElemento(etapa, origen); // C
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}	
 		
-//		try {
-//			System.out.println();
-//			System.out.println("Etapa: "+etapa+" => " +solucion.recuperarElemento(etapa) + " Costo Restante: "+valor);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//			System.out.println();
+		verticesPendientes.sacar(origen); // O(n)
 		
-		verticesPendientes.sacar(origen);
-		
-		ConjuntoTDA<String> verticesAdyacentes = new Conjunto<String>();
-		verticesAdyacentes = g.Adyacentes(origen);
-		while (!verticesAdyacentes.conjuntoVacio()) {
-			String unVerticeAdyacente = verticesAdyacentes.elegir();
-			verticesAdyacentes.sacar(unVerticeAdyacente);
+		ConjuntoTDA<String> verticesAdyacentes = new Conjunto<String>(); // C
+		verticesAdyacentes = g.Adyacentes(origen); // O(n)
+		while (!verticesAdyacentes.conjuntoVacio()) { // C
+			String unVerticeAdyacente = verticesAdyacentes.elegir(); // C
+			verticesAdyacentes.sacar(unVerticeAdyacente); // O(n)
+			
 			// Si es factible:
 			// * El vértice aún no ha sido visitado.
 			// * Al visitarlo no excedo el valor de costo máximo.
-			if (verticesPendientes.pertenece(unVerticeAdyacente)){
-				if (valor - g.PesoArista(origen, unVerticeAdyacente) >= 0) {
+			
+			if (verticesPendientes.pertenece(unVerticeAdyacente)){ // O(n)
+				if (valor - g.PesoArista(origen, unVerticeAdyacente) >= 0) {  // O(n)
 					Ejercicio4Bis(g, unVerticeAdyacente, valor- g.PesoArista(origen, unVerticeAdyacente),
 							verticesPendientes, solucion, etapa+1);
+					
 					// Si es final:
 					// * Verifica si quedan vértices pendientes de visitar.
 					// * Verifica que el recorrido haya costado lo mismo que valor.
 
-					if (verticesPendientes.conjuntoVacio() && (valor - g.PesoArista(origen, unVerticeAdyacente)==0)){
-						verticesPendientes.agregar(unVerticeAdyacente);
-						System.out.println();
-						System.out.println("Ejercicio 4:");
-						System.out.print("Se pudo encontrar una solución: ");
-						for (int i=1; i<=etapa+1;i++){
+					if (verticesPendientes.conjuntoVacio() && (valor - g.PesoArista(origen, unVerticeAdyacente)==0)){ // C && O(n)
+						System.out.print("      * ");
+						for (int i=1; i<=etapa+1;i++){  // O(n)
 							try {
 								System.out.print(solucion.recuperarElemento(i) + " ");
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 						};
-						//Termina el backtracking.
-						System.out.println("Terminar Backtracking");
-					}else{
-						verticesPendientes.agregar(unVerticeAdyacente);
+						System.out.println();
 					}
+					verticesPendientes.agregar(unVerticeAdyacente); // O(n)
 				};
 			};
-		};
-	}
+		}; // O(n^2)
+	};
 }

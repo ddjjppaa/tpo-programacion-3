@@ -54,11 +54,11 @@ public class Algoritmos {
 					resultadoParcial.AgregarArista(origen, vertAdy, pesoAcum); // O(n)
 				}
 			}
-			FloydRec(g, origen, vertAdy, g.Adyacentes(vertAdy), pesoAcum, resultadoParcial); // O(n) + ?
+			FloydRec(g, origen, vertAdy, g.Adyacentes(vertAdy), pesoAcum, resultadoParcial); // ?
 			pesoAcum = pesoAcum-g.PesoArista(adyacente, vertAdy); // O(n)
 		}// O(n) * O(n) = O(n^2)
 
-	} // O(n^2) Validar con el apunte de recursividad...
+	} // O(n^2)
 	
 	// Ejercicio 3C
 	public static GrafoDirTDA<String> FloydPD(GrafoDirTDA<String> g) {
