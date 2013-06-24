@@ -47,36 +47,37 @@ public class Ejercicios {
 		miGrafo.AgregarArista("d", "g", 4);
 		miGrafo.AgregarArista("e", "h", 3);
 		miGrafo.AgregarArista("f", "g", 3);
-		miGrafo.AgregarArista("f","h",3);
-		miGrafo.AgregarArista("f","i",2);
-		miGrafo.AgregarArista("f","j",4);
-		miGrafo.AgregarArista("g","k",2);
-		miGrafo.AgregarArista("h","l",1);
-		miGrafo.AgregarArista("h","o",8);
-		miGrafo.AgregarArista("i","j",3);
-		miGrafo.AgregarArista("i","l",3);
-		miGrafo.AgregarArista("i","m",2);
-		miGrafo.AgregarArista("j","k",6);
-		miGrafo.AgregarArista("j","m",6);
-		miGrafo.AgregarArista("j","n",3);
-		miGrafo.AgregarArista("k","n",4);
-		miGrafo.AgregarArista("k","r",2);
-		miGrafo.AgregarArista("l","m",3);
-		miGrafo.AgregarArista("l","o",6);
-		miGrafo.AgregarArista("m","o",4);
-		miGrafo.AgregarArista("m","p",2);
-		miGrafo.AgregarArista("m","n",5);
-		miGrafo.AgregarArista("n","q",2);
-		miGrafo.AgregarArista("n","r",1);
-		miGrafo.AgregarArista("o","p",2);
-		miGrafo.AgregarArista("o","s",6);
-		miGrafo.AgregarArista("p","s",2);
-		miGrafo.AgregarArista("p","t",1);
-		miGrafo.AgregarArista("p","q",1);
-		miGrafo.AgregarArista("q","t",3);
-		miGrafo.AgregarArista("q","r",8);
-		miGrafo.AgregarArista("s","z",2);
-		miGrafo.AgregarArista("t","z",8);
+		miGrafo.AgregarArista("f", "h", 3);
+		miGrafo.AgregarArista("f", "i", 2);
+		miGrafo.AgregarArista("f", "j", 4);
+		miGrafo.AgregarArista("g", "k", 2);
+		miGrafo.AgregarArista("h", "l", 1);
+		miGrafo.AgregarArista("h", "o", 8);
+		miGrafo.AgregarArista("i", "j", 3);
+		miGrafo.AgregarArista("i", "l", 3);
+		miGrafo.AgregarArista("i", "m", 2);
+		miGrafo.AgregarArista("j", "k", 6);
+		miGrafo.AgregarArista("j", "m", 6);
+		miGrafo.AgregarArista("j", "n", 3);
+		miGrafo.AgregarArista("k", "n", 4);
+		miGrafo.AgregarArista("k", "r", 2);
+		miGrafo.AgregarArista("l", "m", 3);
+		miGrafo.AgregarArista("l", "o", 6);
+		miGrafo.AgregarArista("m", "o", 4);
+		miGrafo.AgregarArista("m", "p", 2);
+		miGrafo.AgregarArista("m", "n", 5);
+		miGrafo.AgregarArista("n", "q", 2);
+		miGrafo.AgregarArista("n", "r", 1);
+		miGrafo.AgregarArista("o", "p", 2);
+		miGrafo.AgregarArista("o", "s", 6);
+		miGrafo.AgregarArista("p", "s", 2);
+		miGrafo.AgregarArista("p", "t", 1);
+		miGrafo.AgregarArista("p", "q", 1);
+		miGrafo.AgregarArista("q", "t", 3);
+		miGrafo.AgregarArista("q", "r", 8);
+		miGrafo.AgregarArista("s", "z", 2);
+		miGrafo.AgregarArista("t", "r", 5);
+		miGrafo.AgregarArista("t", "z", 8);
 		
 		// Agrego caminos en sentido opuesto
 		
@@ -91,52 +92,69 @@ public class Ejercicios {
 		miGrafo.AgregarArista("g", "d", 4);
 		miGrafo.AgregarArista("h", "e", 3);
 		miGrafo.AgregarArista("g", "f", 3);
-		miGrafo.AgregarArista("h", "f",3);
-		miGrafo.AgregarArista("i", "f",2);
-		miGrafo.AgregarArista("j", "f",4);
-		miGrafo.AgregarArista("k", "g",2);
-		miGrafo.AgregarArista("l", "h",1);
-		miGrafo.AgregarArista("o", "h",8);
-		miGrafo.AgregarArista("j", "i",3);
-		miGrafo.AgregarArista("l", "i",3);
-		miGrafo.AgregarArista("m", "i",2);
-		miGrafo.AgregarArista("k", "j",6);
-		miGrafo.AgregarArista("m", "j",6);
-		miGrafo.AgregarArista("n", "j",3);
-		miGrafo.AgregarArista("n", "k",4);
-		miGrafo.AgregarArista("r", "k",2);
-		miGrafo.AgregarArista("m", "l",3);
-		miGrafo.AgregarArista("o", "l",6);
-		miGrafo.AgregarArista("o", "m",4);
-		miGrafo.AgregarArista("p", "m",2);
-		miGrafo.AgregarArista("n", "m",5);
-		miGrafo.AgregarArista("q", "n",2);
-		miGrafo.AgregarArista("r", "n",1);
-		miGrafo.AgregarArista("p", "o",2);
-		miGrafo.AgregarArista("s", "o",6);
-		miGrafo.AgregarArista("s", "p",2);
-		miGrafo.AgregarArista("t", "p",1);
-		miGrafo.AgregarArista("q", "p",1);
-		miGrafo.AgregarArista("t", "q",3);
-		miGrafo.AgregarArista("r", "q",8);
-		miGrafo.AgregarArista("z", "s",2);
-		miGrafo.AgregarArista("z", "t",8);
+		miGrafo.AgregarArista("h", "f", 3);
+		miGrafo.AgregarArista("i", "f", 2);
+		miGrafo.AgregarArista("j", "f", 4);
+		miGrafo.AgregarArista("k", "g", 2);
+		miGrafo.AgregarArista("l", "h", 1);
+		miGrafo.AgregarArista("o", "h", 8);
+		miGrafo.AgregarArista("j", "i", 3);
+		miGrafo.AgregarArista("l", "i", 3);
+		miGrafo.AgregarArista("m", "i", 2);
+		miGrafo.AgregarArista("k", "j", 6);
+		miGrafo.AgregarArista("m", "j", 6);
+		miGrafo.AgregarArista("n", "j", 3);
+		miGrafo.AgregarArista("n", "k", 4);
+		miGrafo.AgregarArista("r", "k", 2);
+		miGrafo.AgregarArista("m", "l", 3);
+		miGrafo.AgregarArista("o", "l", 6);
+		miGrafo.AgregarArista("o", "m", 4);
+		miGrafo.AgregarArista("p", "m", 2);
+		miGrafo.AgregarArista("n", "m", 5);
+		miGrafo.AgregarArista("q", "n", 2);
+		miGrafo.AgregarArista("r", "n", 1);
+		miGrafo.AgregarArista("p", "o", 2);
+		miGrafo.AgregarArista("s", "o", 6);
+		miGrafo.AgregarArista("s", "p", 2);
+		miGrafo.AgregarArista("t", "p", 1);
+		miGrafo.AgregarArista("q", "p", 1);
+		miGrafo.AgregarArista("t", "q", 3);
+		miGrafo.AgregarArista("r", "q", 8);
+		miGrafo.AgregarArista("t", "r", 5);
+		miGrafo.AgregarArista("z", "s", 2);
+		miGrafo.AgregarArista("z", "t", 8);
 
 		return miGrafo;
 	}
 
 	// Ejercicio 2A
 	
-	static int Ejercicio2A(GrafoDirTDA<String> g) {
+	public static int Ejercicio2A(GrafoDirTDA<String> g) throws Exception {
+		String origen = "a";
+		String destino = "z";
+		GrafoDirTDA<String> distanciasMinimas = new GrafoDir<String>();
+		distanciasMinimas.InicializarGrafo();
+		distanciasMinimas.AgregarVertice(destino);
+//		distanciasMinimas.AgregarVertice(origen);
+//		distanciasMinimas.AgregarArista(origen, destino, -1);
+		Algoritmos.Dijkstra(g, origen, distanciasMinimas);
 
-		return 0;
+		return distanciasMinimas.PesoArista(origen, destino);
 	}
 
 	// Ejercicio 2B
 	
-	static int Ejercicio2B(GrafoDirTDA<String> g) {
+	public static int Ejercicio2B(GrafoDirTDA<String> g) throws Exception {
+		String origen = "c";
+		String destino = "p";
+		GrafoDirTDA<String> distanciasMinimas = new GrafoDir<String>();
+		distanciasMinimas.InicializarGrafo();
+		distanciasMinimas.AgregarVertice(destino);
+//		distanciasMinimas.AgregarVertice(origen);
+//		distanciasMinimas.AgregarArista(origen, destino, -1);
+		Algoritmos.Dijkstra(g, origen, distanciasMinimas);
 
-		return 0;
+		return distanciasMinimas.PesoArista(origen, destino);
 	}
 
 	// Ejercicio 3D
@@ -180,33 +198,35 @@ public class Ejercicios {
 		ConjuntoTDA<String> conjuntoVerticesPendientes = new Conjunto<String>(); // C
 		conjuntoVerticesPendientes = g.Vertices();  // O(n)
 		int etapa = 1; // C
-		Ejercicio4Bis(g, origen, valor, conjuntoVerticesPendientes, solucion, etapa);
+		try {
+			Ejercicio4Bis(g, origen, valor, conjuntoVerticesPendientes, solucion, etapa);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	static void Ejercicio4Bis (GrafoDirTDA<String> g, String origen, int valor,
-		ConjuntoTDA<String> verticesPendientes, VectorTDA<String> solucion, int etapa) {
+	static boolean Ejercicio4Bis (GrafoDirTDA<String> g, String origen, int valor,
+		ConjuntoTDA<String> verticesPendientes, VectorTDA<String> solucion, int etapa) throws Exception{
 		
-		try {
-			solucion.agregarElemento(etapa, origen); // C
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}	
+		boolean haySolucion = false;
+		
+		solucion.agregarElemento(etapa, origen); // C	
 		
 		verticesPendientes.sacar(origen); // O(n)
 		
 		ConjuntoTDA<String> verticesAdyacentes = new Conjunto<String>(); // C
 		verticesAdyacentes = g.Adyacentes(origen); // O(n)
-		while (!verticesAdyacentes.conjuntoVacio()) { // C
+		while (!verticesAdyacentes.conjuntoVacio() && !haySolucion) { // C
 			String unVerticeAdyacente = verticesAdyacentes.elegir(); // C
 			verticesAdyacentes.sacar(unVerticeAdyacente); // O(n)
 			
 			// Si es factible:
 			// * El vŽrtice aœn no ha sido visitado.
 			// * Al visitarlo no excedo el valor de costo m‡ximo.
-			
 			if (verticesPendientes.pertenece(unVerticeAdyacente)){ // O(n)
 				if (valor - g.PesoArista(origen, unVerticeAdyacente) >= 0) {  // O(n)
-					Ejercicio4Bis(g, unVerticeAdyacente, valor- g.PesoArista(origen, unVerticeAdyacente),
+					haySolucion = Ejercicio4Bis(g, unVerticeAdyacente, valor- g.PesoArista(origen, unVerticeAdyacente),
 							verticesPendientes, solucion, etapa+1);
 					
 					// Si es final:
@@ -216,17 +236,16 @@ public class Ejercicios {
 					if (verticesPendientes.conjuntoVacio() && (valor - g.PesoArista(origen, unVerticeAdyacente)==0)){ // C && O(n)
 						System.out.print("      * ");
 						for (int i=1; i<=etapa+1;i++){  // O(n)
-							try {
-								System.out.print(solucion.recuperarElemento(i) + " ");
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
+							System.out.print(solucion.recuperarElemento(i) + " ");
 						};
 						System.out.println();
+						// Cambiar a false para backtracking puro.
+						haySolucion=true;
 					}
 					verticesPendientes.agregar(unVerticeAdyacente); // O(n)
 				};
 			};
 		}; // O(n^2)
+		return haySolucion;
 	};
 }
