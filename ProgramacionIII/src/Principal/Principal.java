@@ -9,8 +9,9 @@ public class Principal {
 	 */
 	public static void main(String[] args) {
 		
-		long startPD, timePD, startRec, timeRec;
-		
+		long startPD, timePD, startRec, timeRec, startBack, timeBack;
+		String vertice;
+		Integer costo;
 		GrafoDirTDA<String> miGrafo = Ejercicios.cargarGrafo();
 		
 		System.out.println("2.");
@@ -23,7 +24,9 @@ public class Principal {
 		System.out.println("    Floyd Recursivo");
 		System.out.println();		
 		startRec = System.currentTimeMillis();
+		
 		//TODO Corregir que tira error al agregar caminos en sentido opuesto en Ejercicios.class
+		
 		//Algoritmos.FloydRecursivo(miGrafo);
 		timeRec = System.currentTimeMillis() - startRec;
 		System.out.println("        Tiempo de Ejecución: " + timeRec + " ms");
@@ -51,11 +54,21 @@ public class Principal {
 		System.out.println();
 		System.out.print("      * El tiempo demorado por el algoritmo de Floyd con Programación Dinámica es: " + timePD + "ms.");
 		System.out.println();
+		System.out.print("      * El algoritmo de Floyd Recursivo demora un: " + timeRec/timePD + " % más que el algoritmo de Floyd con Programación Dinámica.");
+		System.out.println();
+		
+		vertice="i";
+		costo=69;
 		
 		System.out.println("4.");
 		System.out.println("  a)");
-		System.out.println("    Camino que partiendo de un vértice recorra todo el grafo sin repetición de vértices y su costo sea el especificado como parámetro");
+		System.out.println("    Camino que partiendo desde el vértice '" + vertice + "' recorra todo el grafo sin repetición de vértices y su costo sea " + costo + ".");
 		System.out.println();
-		Ejercicios.Ejercicio4(miGrafo, "a", 69);
+		startBack = System.currentTimeMillis();
+		Ejercicios.Ejercicio4(miGrafo, vertice, costo);
+		timeBack = System.currentTimeMillis() - startBack;
+		System.out.println();
+		System.out.println("        Tiempo de Ejecución: " + timeBack + " ms");
+		System.out.println();
 	}
 }
