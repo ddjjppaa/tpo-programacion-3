@@ -10,6 +10,7 @@ import TDA.VectorTDA;
 public class Ejercicios {
 
 	// Ejercicio 1
+	
 	public static GrafoDirTDA<String> cargarGrafo() {
 		GrafoDirTDA<String> miGrafo = new GrafoDir<String>();
 		miGrafo.InicializarGrafo();
@@ -129,32 +130,74 @@ public class Ejercicios {
 
 	// Ejercicio 2A
 	
-	public static int Ejercicio2A(GrafoDirTDA<String> g) throws Exception {
+	public static int Ejercicio2A(GrafoDirTDA<String> g) {
 		String origen = "a";
 		String destino = "z";
-		GrafoDirTDA<String> distanciasMinimas = new GrafoDir<String>();
-		distanciasMinimas.InicializarGrafo();
-		distanciasMinimas.AgregarVertice(destino);
-//		distanciasMinimas.AgregarVertice(origen);
-//		distanciasMinimas.AgregarArista(origen, destino, -1);
-		Algoritmos.Dijkstra(g, origen, distanciasMinimas);
-
-		return distanciasMinimas.PesoArista(origen, destino);
+		GrafoDirTDA<String> miGrafoCaminosDijkstra = new GrafoDir<String>();
+		GrafoDirTDA<String> miGrafoDijkstra = new GrafoDir<String>();
+		miGrafoDijkstra = Algoritmos.Dijkstra(g, origen, miGrafoCaminosDijkstra);
+		ConjuntoTDA <String> verticesPendientes = g.Vertices();
+		VectorTDA<String> solucion = new Vector<String>();
+		solucion.inicializarVector(1000);
+		int etapa = 1;
+		int pesoAcumulado=0;
+		try {
+			Algoritmos.CaminoDijkstra(miGrafoCaminosDijkstra, origen, destino, verticesPendientes, solucion, etapa);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		System.out.print("      * ");
+		int pesoDijkstra = miGrafoDijkstra.PesoArista(origen, destino);
+		for (int i=1; i<=10;i++){  // O(n)
+			try {
+				if(solucion.recuperarElemento(i) !=null){
+					if(pesoAcumulado <= pesoDijkstra){
+						System.out.print(solucion.recuperarElemento(i) + " ");
+						pesoAcumulado = pesoAcumulado + miGrafoCaminosDijkstra.PesoArista(solucion.recuperarElemento(i), solucion.recuperarElemento(i+1));
+						//System.out.println(pesoAcumulado);
+					}
+				}
+			} catch (Exception e) {
+			}
+		};
+		System.out.println();
+		return pesoDijkstra;
 	}
 
 	// Ejercicio 2B
 	
-	public static int Ejercicio2B(GrafoDirTDA<String> g) throws Exception {
+	public static int Ejercicio2B(GrafoDirTDA<String> g) {
 		String origen = "c";
 		String destino = "p";
-		GrafoDirTDA<String> distanciasMinimas = new GrafoDir<String>();
-		distanciasMinimas.InicializarGrafo();
-		distanciasMinimas.AgregarVertice(destino);
-//		distanciasMinimas.AgregarVertice(origen);
-//		distanciasMinimas.AgregarArista(origen, destino, -1);
-		Algoritmos.Dijkstra(g, origen, distanciasMinimas);
-
-		return distanciasMinimas.PesoArista(origen, destino);
+		GrafoDirTDA<String> miGrafoCaminosDijkstra = new GrafoDir<String>();
+		GrafoDirTDA<String> miGrafoDijkstra = new GrafoDir<String>();
+		miGrafoDijkstra = Algoritmos.Dijkstra(g, origen, miGrafoCaminosDijkstra);
+		ConjuntoTDA <String> verticesPendientes = g.Vertices();
+		VectorTDA<String> solucion = new Vector<String>();
+		solucion.inicializarVector(1000);
+		int etapa = 1;
+		int pesoAcumulado=0;
+		try {
+			Algoritmos.CaminoDijkstra(miGrafoCaminosDijkstra, origen, destino, verticesPendientes, solucion, etapa);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		System.out.print("      * ");
+		int pesoDijkstra = miGrafoDijkstra.PesoArista(origen, destino);
+		for (int i=1; i<=10;i++){  // O(n)
+			try {
+				if(solucion.recuperarElemento(i) !=null){
+					if(pesoAcumulado <= pesoDijkstra){
+						System.out.print(solucion.recuperarElemento(i) + " ");
+						pesoAcumulado = pesoAcumulado + miGrafoCaminosDijkstra.PesoArista(solucion.recuperarElemento(i), solucion.recuperarElemento(i+1));
+						//System.out.println(pesoAcumulado);
+					}
+				}
+			} catch (Exception e) {
+			}
+		};
+		System.out.println();
+		return pesoDijkstra;
 	}
 
 	// Ejercicio 3D
@@ -199,7 +242,9 @@ public class Ejercicios {
 		conjuntoVerticesPendientes = g.Vertices();  // O(n)
 		int etapa = 1; // C
 		try {
-			Ejercicio4Bis(g, origen, valor, conjuntoVerticesPendientes, solucion, etapa);
+			if(!Ejercicio4Bis(g, origen, valor, conjuntoVerticesPendientes, solucion, etapa)){
+				System.out.println("      * No se ha encontrado una soluci—n.");
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

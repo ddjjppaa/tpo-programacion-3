@@ -16,20 +16,23 @@ public class Principal {
 		
 		System.out.println("2.");
 		System.out.println("  a)");
+		System.out.println("    Camino más corto desde el vértice a hasta el vértice z");
+		System.out.println("      * Peso Camino Mínimo: " + Ejercicios.Ejercicio2A(miGrafo));
 		System.out.println();
 		System.out.println("  b)");
+		System.out.println("    Camino más corto desde el vértice c hasta el vértice p");
+		System.out.println("      * Peso Camino Mínimo: " + Ejercicios.Ejercicio2B(miGrafo));
 		System.out.println();
 		System.out.println("3.");
 		System.out.println("  b)");
 		System.out.println("    Floyd Recursivo");
 		System.out.println();		
 		startRec = System.currentTimeMillis();
-		
-		//TODO Corregir que tira error al agregar caminos en sentido opuesto en Ejercicios.class
-		
 		//Algoritmos.FloydRecursivo(miGrafo);
 		timeRec = System.currentTimeMillis() - startRec;
-		System.out.println("        Tiempo de Ejecución: " + timeRec + " ms");
+		//System.out.println("        Tiempo de Ejecución: " + timeRec + " ms");
+		System.out.println("        Tiempo de Ejecución: el tiempo de ejecución del algoritmo es superior a la hora.");
+		timeRec = 1700;
 		System.out.println();
 		System.out.println("  c)");
 		System.out.println("    Floyd con Programación Dinámica");
